@@ -2,13 +2,15 @@ package curcul.test;
 
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.logevents.SelenideLogger;
+import curcul.config.CredentialsConfig;
 import curcul.helpers.Attach;
 import io.qameta.allure.selenide.AllureSelenide;
+import org.aeonbits.owner.ConfigFactory;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.openqa.selenium.remote.DesiredCapabilities;
-import org.aeonbits.owner.ConfigFactory;
-import curcul.config.CredentialsConfig;
+
+
 
 
 import static com.codeborne.selenide.Selenide.closeWebDriver;
