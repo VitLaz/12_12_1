@@ -7,18 +7,28 @@ import io.qameta.allure.selenide.AllureSelenide;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.openqa.selenium.remote.DesiredCapabilities;
+import org.aeonbits.owner.ConfigFactory;
+import curcul.config.CredentialsConfig;
+
 
 import static com.codeborne.selenide.Selenide.closeWebDriver;
 
 public class TestBase {
+    CredentialsConfig config = ConfigFactory.create(CredentialsConfig.class);
 
     @BeforeAll
     static void setUp() {
         SelenideLogger.addListener("AllureSelenide", new AllureSelenide());
 
-        Configuration.baseUrl = "https://demoqa.com";
-        Configuration.browserSize = "1920x1080";
-        Configuration.remote = "https://user1:1234@selenoid.autotests.cloud/wd/hub";
+        String login = config.login();
+        String password = config.password();
+        String baseURL = System.getProperty("baseURL", "https://demoqa.com");
+        String browserSize = System.getProperty("browserSize","1920x1080");
+        String remote = System.getProperty("remote","selenoid.autotests.cloud/wd/hub");
+
+        Configuration.baseUrl = baseURL;
+        Configuration.browserSize = browserSize;
+        Configuration.remote = String.format("https://%s:%s@%s", login, password, remote);
 
         DesiredCapabilities capabilities = new DesiredCapabilities();
         capabilities.setCapability("enableVNC", true);
