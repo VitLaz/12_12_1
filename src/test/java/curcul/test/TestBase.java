@@ -16,7 +16,7 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 import static com.codeborne.selenide.Selenide.closeWebDriver;
 
 public class TestBase {
-    CredentialsConfig config = ConfigFactory.create(CredentialsConfig.class);
+    static CredentialsConfig config = ConfigFactory.create(CredentialsConfig.class);
 
     @BeforeAll
     static void setUp() {
@@ -27,6 +27,7 @@ public class TestBase {
         String baseURL = System.getProperty("baseURL", "https://demoqa.com");
         String browserSize = System.getProperty("browserSize","1920x1080");
         String remote = System.getProperty("remote","selenoid.autotests.cloud/wd/hub");
+        String browser = System.getProperty("browser","chrome");
 
         Configuration.baseUrl = baseURL;
         Configuration.browserSize = browserSize;
